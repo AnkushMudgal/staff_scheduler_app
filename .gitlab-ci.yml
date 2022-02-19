@@ -3,31 +3,9 @@ stages:
   - test
   - deploy
 
-name: CI
-
-on:
-  push:
-    branches: dev-hm-ag2ss-19
-  pull_request:
-    branches: dev-hm-ag2ss-19
-
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Build with Maven
-        run: mvn clean install
-      - name: Download DesigniteJava
-        run: wget "https://www.designite-tools.com/static/download/DJE/DesigniteJava.jar"
-      - name: Analyze project with DesigniteJava
-        run: |
-          java -jar DesigniteJava.jar -ci -repo $GITHUB_REPOSITORY -pat ${{ secrets.PAT }} -k ${{ secrets.D_KEY }}
-          ls
-          curl -X PUT -H "Authorization: Token ${{ secrets.QSCORED_API_KEY }}" -H "repository-link:https://github.com/" + GITHUB_REPOSITORY -H "username: 'hr637632@dal.ca'" -H "Content-Type: mulitpart/form-data" --url "https://qscored.com/api/upload/file.xml?is_open_access=off&version=$GITHUB_RUN_NUMBER&project_name='group20'" -F "file=@Designite_output/DesigniteAnalysis.xml"
-
 maven-build:
+  variables:
+    GIT_CHECKOUT: "true"
   image: maven:3-jdk-11
   stage: build
   script: "mvn package -B"
@@ -40,6 +18,19 @@ maven-build:
       - feature-admin
       - feature-frontend
       - feature-backend
+
+build:
+  variables:
+    GIT_CHECKOUT: "true"
+  script:
+    - mvn clean install
+    - java -jar DesigniteJava.jar -ci -repo $GITHUB_REPOSITORY -pat ${{ secrets.PAT }} -k ${{ secrets.D_KEY }}
+    - ls
+    - curl -X PUT -H "Authorization:Token ${{ secrets.QSCORED_API_KEY }}" -H "repository-link:https://github.com/" + GITHUB_REPOSITORY -H "username: 'Your email'" -H "Content-Type: mulitpart/form-data" --url "https://qscored.com/api/upload/file.xml?is_open_access=off&version=$GITHUB_RUN_NUMBER&project_name='Project name'" -F "file=@Designite_output/DesigniteAnalysis.xml"
+  tags:
+    - linux
+  stage: build
+
 
 maven-test:
   image: maven:3-jdk-11
