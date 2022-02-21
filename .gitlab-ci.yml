@@ -26,10 +26,10 @@ build:
     - mvn clean install
     - java -jar DesigniteJava.jar -ci -repo $GITHUB_REPOSITORY -pat ${{ secrets.PAT }} -k ${{ secrets.D_KEY }}
     - ls
-    curl --request PUT --header "PRIVATE-TOKEN: <your_access_token>"\
+    curl --request PUT --header "PRIVATE-TOKEN: JAd1o3WHkFOzCkbH"\
       --header "content-type: mulitpart/form-data"\
-      --url "https://qscored.com/api/upload/file.xml?is_open_access=off&version=$GITHUB_RUN_NUMBER&project_name='group20'"\
-      -F "file=@Designite_output/DesigniteAnalysis.xml"
+      --url "https://qscored.com/api/upload/file.xml?is_open_access=off&version=$GITHUB_RUN_NUMBER&project_name='group20'"
+
   tags:
     - linux
   stage: build
