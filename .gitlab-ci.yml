@@ -28,7 +28,7 @@ build:
     - ls
     curl --request PUT --header "PRIVATE-TOKEN: JAd1o3WHkFOzCkbH"\
       --header "content-type: mulitpart/form-data"\
-      --url "https://qscored.com/api/upload/file.xml?is_open_access=off&version=$GITHUB_RUN_NUMBER&project_name='group20'"
+      --url "https://qscored.com/api/upload/file.xml?is_open_access=off&project_name='group20'"
 
   tags:
     - linux
