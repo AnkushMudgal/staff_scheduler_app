@@ -4,8 +4,6 @@ stages:
   - deploy
 
 maven-build:
-  variables:
-    GIT_CHECKOUT: "true"
   image: maven:3-jdk-11
   stage: build
   script: "mvn package -B"
@@ -18,23 +16,6 @@ maven-build:
       - feature-admin
       - feature-frontend
       - feature-backend
-
-build:
-  variables:
-    GIT_CHECKOUT: "true"
-  script:
-    - mvn clean install
-    - wget "https://www.designite-tools.com/static/download/DJE/DesigniteJava.jar"
-    - java -jar DesigniteJava.jar -ci -repo 'group20' 
-      ls
-    curl --request PUT --header "PRIVATE-TOKEN: "JAd1o3WHkFOzCkbH"
-      --header "content-type: mulitpart/form-data"
-      --header "https://git.cs.dal.ca/courses/2022-winter/csci-5308/group20/-/tree/main"
-      --url "https://qscored.com/api/upload/file.xml?is_open_access=off&version=v1&project_name='group20'"
-  tags:
-    - linux
-  stage: build
-
 
 maven-test:
   image: maven:3-jdk-11
@@ -54,11 +35,10 @@ deploy:
   stage: deploy
   image: ruby:latest
   script:
-  - apt-get update -qy
-  - apt-get install -y ruby-dev
-  - gem install dpl
-  - dpl --provider=heroku --app=app-staff-scheduler --api-key=$HEROKU_API_KEY
+    - apt-get update -qy
+    - apt-get install -y ruby-dev
+    - gem install dpl
+    - dpl --provider=heroku --app=app-staff-scheduler --api-key=$HEROKU_API_KEY
   only:
     refs:
       - main
-
