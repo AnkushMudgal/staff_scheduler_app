@@ -22,7 +22,6 @@ code_quality:
   only:
     refs:
       - main
-      - feature-admin-quality
       - dev-hm-ag2ss-19
 
 maven-build:
