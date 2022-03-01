@@ -17,12 +17,13 @@ code_quality:
     UPLOAD_QUALITY_REPORT: 'curl -X PUT -H "Authorization: Token $QSCORED_API_KEY" -H "repository-link: $CI_PROJECT_URL" +  -H "username: hr637632@dal.ca" -H "Content-Type: mulitpart/form-data" --url "https://qscored.com/api/upload/file.xml?is_open_access=false&version=$CI_PIPELINE_IID&project_name=group20" -F "file=@Designite_output/DesigniteAnalysis.xml"'
   script:
     - wget -O DesigniteJava.jar https://www.dropbox.com/s/hrfuiesdb9o6cg5/DesigniteJava.jar?dl=1
-    - java -jar DesigniteJava.jar -ci -repo $CI_PROJECT_PATH -pat $PAT -host "https://git.cs.dal.ca/courses/2022-winter/csci-5308/group20.git"
+    - java -jar DesigniteJava.jar -ci -repo $CI_PROJECT_PATH -pat $PAT -host "gitlab.com"
     - 'eval "$UPLOAD_QUALITY_REPORT"'
   only:
     refs:
       - main
       - dev-hm-ag2ss-19
+      - feature-admin-quality
 
 maven-build:
   image: maven:3-jdk-11
