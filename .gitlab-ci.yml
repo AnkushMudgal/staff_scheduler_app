@@ -27,6 +27,8 @@ maven-build:
   image: maven:3-jdk-11
   stage: build
   script: "mvn package -B"
+  tags:
+    - dalfcs_gitlab_docker_ci
   only:
     refs:
       - main
