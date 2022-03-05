@@ -20,9 +20,7 @@ code_quality:
     - 'eval "$UPLOAD_QUALITY_REPORT"'
   only:
     refs:
-      - main
-      - dev-hm-ag2ss-19
-      - feature-admin-quality
+      - code-quality
 
 
 maven-build:
