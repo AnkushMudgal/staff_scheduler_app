@@ -21,7 +21,6 @@ code_quality:
   only:
     refs:
       - main
-      - dev-hm-ag2ss-19
       - feature-admin-quality
 
 
