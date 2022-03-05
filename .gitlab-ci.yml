@@ -33,7 +33,7 @@ maven-build:
       - develop
       - test
       - merge_requests
-      - feature-admin
+      - feature-admin/
       - feature-frontend
       - feature-backend
       - feature-admin-quality
