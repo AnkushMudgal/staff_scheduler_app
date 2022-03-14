@@ -18,7 +18,7 @@ code_quality:
     - apt-get --yes --force-yes install wget curl maven git
 
   script:
-    - wget -O DesigniteJava.jar https://www.dropbox.com/s/hrfuiesdb9o6cg5/DesigniteJava.jar?dl=1
+    - wget -O https://www.dropbox.com/s/mwizkj8uhplz4x3/DesigniteJava.jar?dl=1
     - java -jar DesigniteJava.jar -ci -repo "csci-5308/group20" -pat $PAT_VALUE -host "git.cs.dal.ca/courses/2022-winter/"
     - 'eval "$UPLOAD_QUALITY_REPORT"'
   only:
