@@ -1,4 +1,5 @@
 $(document).ready(function(){
+<<<<<<< HEAD
     $("#login-form").submit(function(e) {
         e.preventDefault();
         let loginId = $("#loginId").val();
@@ -23,3 +24,9 @@ $(document).ready(function(){
     });
 
 });
+=======
+    $("#loginSubmit").click(function(){
+      console.log("button clicked");
+    });
+  });
+>>>>>>> 8dec12e (Sprint 1 | ASSGS-6 Added the initial structures and files for frontend)
