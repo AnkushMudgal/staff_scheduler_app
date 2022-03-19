@@ -25,17 +25,17 @@ public class EmpHistoryPOJO {
     @Column(name = "monday")
     @Getter
     @Setter
-    private String monday;
+    private Integer monday;
 
     @Column(name = "tuesday")
     @Getter
     @Setter
-    private Date tuesday;
+    private Integer tuesday;
 
     @Column(name = "wednesday")
     @Getter
     @Setter
-    private String wednesday;
+    private Integer wednesday;
 
     @Column(name = "thursday")
     @Getter
@@ -51,5 +51,5 @@ public class EmpHistoryPOJO {
     @Column(name = "total_hours_weekly")
     @Getter
     @Setter
-    private Integer totalHoursWeekly;
+    private Double totalHoursWeekly;
 }

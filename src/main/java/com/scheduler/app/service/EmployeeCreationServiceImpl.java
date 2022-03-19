@@ -43,6 +43,7 @@ public class EmployeeCreationServiceImpl implements EmployeeCreationService {
                 newEmployee.setDepartmentId(employeeCreationRequest.getDepartmentId());
                 newEmployee.setFirstName(employeeCreationRequest.getFirstName());
                 newEmployee.setLastName(employeeCreationRequest.getLastName());
+
                 newEmployee.setPhoneNumber(employeeCreationRequest.getPhoneNumber());
                 newEmployee.setJobType(employeeCreationRequest.getJobType());
                 newEmployee.setMaxAvailabilityHours(employeeCreationRequest.getMaxAvailabilityHours());

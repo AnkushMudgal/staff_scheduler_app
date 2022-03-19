@@ -2,8 +2,11 @@ package com.scheduler.app.controller;
 
 import com.scheduler.app.model.entity.DailyShiftPOJO;
 import com.scheduler.app.model.entity.EmpAvailabilityPOJO;
+import com.scheduler.app.model.entity.EmpHistoryPOJO;
+import com.scheduler.app.model.repo.EmployeeHistoryRepository;
 import com.scheduler.app.service.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Produces;
@@ -19,6 +22,9 @@ public class SupervisorController {
 
     @Autowired
     SchedulerService schedulerService;
+
+    @Autowired
+    EmployeeHistoryRepository employeeHistoryRepository;
 
     @GetMapping("/get-schedule")
     @Produces(value = MediaType.APPLICATION_JSON)
@@ -37,12 +43,9 @@ public class SupervisorController {
     @GetMapping("/emphistory")
     @Produces(value = MediaType.APPLICATION_JSON)
     public @ResponseBody
-    String getEmpHistory(@RequestParam int employeeId){
-        schedulerService.getEmpHistory(employeeId);
-        return "success";
+    List<EmpHistoryPOJO> getEmpHistory(){
+
+        return schedulerService.getEmpHistory();
     }
-
-
-
 
 }

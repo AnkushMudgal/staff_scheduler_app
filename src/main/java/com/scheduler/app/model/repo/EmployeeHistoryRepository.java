@@ -9,5 +9,7 @@ import java.sql.Time;
 import java.util.List;
 
 public interface EmployeeHistoryRepository extends JpaRepository<EmpHistoryPOJO, Integer> {
-    List<EmpHistoryPOJO> findEmpHistoryById(int employeeId);
+    //List<EmpHistoryPOJO> findEmpHistoryById(Integer employeeId);
+    List<EmpHistoryPOJO> findAll();
+   // void addEmpHistory(Integer employeeId);
 }

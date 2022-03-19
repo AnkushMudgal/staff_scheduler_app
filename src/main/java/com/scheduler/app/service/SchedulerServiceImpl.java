@@ -36,22 +36,24 @@ public class SchedulerServiceImpl implements SchedulerService {
         return availableEmployees;
     }
 
-    @Override
+
     public List<DailyShiftPOJO> getShifts(Date date) {
         List<DailyShiftPOJO> dailyShiftList = dailyShiftRepository.findByShiftDate(date);
         return dailyShiftList;
     }
 
-    @Override
-    public List<EmpHistoryPOJO> getEmpHistory(int employeeId) {
-        List<EmpHistoryPOJO> empHistoryList = employeeHistoryRepository.findEmpHistoryById(employeeId);
+
+    public List<EmpHistoryPOJO> getEmpHistory() {
+        List<EmpHistoryPOJO> empHistoryList = employeeHistoryRepository.findAll();
         return empHistoryList;
-    }
 
+
+    }
+/*
     @Override
-    public void addEmpHistory(int employeeId) {
+    public void addEmpHistory() {
 
-    }
+    }*/
 
 
 }
