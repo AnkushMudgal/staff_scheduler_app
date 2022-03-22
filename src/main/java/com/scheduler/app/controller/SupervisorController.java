@@ -1,19 +1,18 @@
 package com.scheduler.app.controller;
 
 import com.scheduler.app.model.entity.DailyShiftPOJO;
-import com.scheduler.app.model.entity.EmpAvailabilityPOJO;
-import com.scheduler.app.model.entity.EmpHistoryPOJO;
-import com.scheduler.app.model.repo.EmployeeHistoryRepository;
+import com.scheduler.app.model.request.ScheduleRequest;
+import com.scheduler.app.model.response.ScheduleResponse;
 import com.scheduler.app.service.SchedulerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.ws.rs.Produces;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.core.MediaType;
 import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
+import java.util.Map;
 
 
 @RestController
@@ -23,13 +22,10 @@ public class SupervisorController {
     @Autowired
     SchedulerService schedulerService;
 
-    @Autowired
-    EmployeeHistoryRepository employeeHistoryRepository;
-
     @GetMapping("/get-schedule")
     @Produces(value = MediaType.APPLICATION_JSON)
     public @ResponseBody
-    List<EmpAvailabilityPOJO> getEmployees(@RequestParam Date startDate, @RequestParam Date endDate) {
+    Map<String, Map> getEmployees(@RequestParam Date startDate, @RequestParam Date endDate) {
         return  schedulerService.getEmployees(startDate);
     }
 
@@ -43,9 +39,18 @@ public class SupervisorController {
     @GetMapping("/emphistory")
     @Produces(value = MediaType.APPLICATION_JSON)
     public @ResponseBody
-    List<EmpHistoryPOJO> getEmpHistory(){
+    String getEmpHistory(@RequestParam int employeeId){
+        schedulerService.getEmpHistory();
+        return "success";
+    }
 
-        return schedulerService.getEmpHistory();
+    @PostMapping("/fetch/schedule")
+    @Consumes(value = MediaType.APPLICATION_JSON)
+    @Produces(value = MediaType.APPLICATION_JSON)
+    public @ResponseBody
+    ScheduleResponse getScheduleByShift(@RequestBody ScheduleRequest scheduleRequest){
+
+        return schedulerService.getScheduleByDateTime(scheduleRequest);
     }
 
 }
