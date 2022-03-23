@@ -125,7 +125,7 @@ public class SchedulerServiceImpl implements SchedulerService {
     }
 
     public List<EmpHistoryPOJO> getEmpHistory(int employeeId) {
-        List<EmpHistoryPOJO> empHistoryList = employeeHistoryRepository.findEmpHistoryById(employeeId);
+        List<EmpHistoryPOJO> empHistoryList = employeeHistoryRepository.findAll();
         return empHistoryList;
     }
 
