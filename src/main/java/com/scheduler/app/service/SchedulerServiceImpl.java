@@ -5,13 +5,10 @@ import com.scheduler.app.model.entity.DepartmentPOJO;
 import com.scheduler.app.constants.REQUEST_STATUS;
 import com.scheduler.app.model.entity.EmpAvailabilityPOJO;
 import com.scheduler.app.model.entity.EmpHistoryPOJO;
-import com.scheduler.app.model.repo.DailyShiftRepository;
+import com.scheduler.app.model.repo.*;
 import com.scheduler.app.model.entity.ScheduleCompositeId;
 import com.scheduler.app.model.entity.SchedulePOJO;
-import com.scheduler.app.model.repo.EmpAvailabilityRepository;
-import com.scheduler.app.model.repo.EmployeeHistoryRepository;
 import com.scheduler.app.util.DateUtil;
-import com.scheduler.app.model.repo.ScheduleRepository;
 import com.scheduler.app.model.request.ScheduleRequest;
 import com.scheduler.app.model.response.ScheduleResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +26,8 @@ public class SchedulerServiceImpl implements SchedulerService {
     public int roleId = 2;
     public Map<String, Map> algoMap = new HashMap<>();
 
-
+    @Autowired
+    EmpavailablitynewRepository empavailablitynewRepository;
 
     @Autowired
     EmpAvailabilityRepository empAvailabilityRepository;
@@ -146,6 +144,12 @@ public class SchedulerServiceImpl implements SchedulerService {
             }
 
         }
+    }
+
+    @Override
+    public List<DailyShiftPOJO> getAllShiftDetails() {
+
+        return null;
     }
 
 

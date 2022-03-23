@@ -17,5 +17,6 @@ public interface SchedulerService {
     public List<DailyShiftPOJO> getShifts(Date date);
     public List<EmpHistoryPOJO> getEmpHistory();
     public ScheduleResponse getScheduleByDateTime(ScheduleRequest request);
+    public List<DailyShiftPOJO> getAllShiftDetails();
 
 }

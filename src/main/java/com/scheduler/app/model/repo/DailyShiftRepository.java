@@ -8,5 +8,7 @@ import java.util.List;
 public interface DailyShiftRepository extends JpaRepository<DailyShiftPOJO, Integer> {
 //        List<DailyShiftPOJO> findByShiftDateTime(Date shiftDate, Time startTime, Time endTime);
         List<DailyShiftPOJO> findByShiftDate(Date shiftDate);
+        List<DailyShiftPOJO> findAll();
+
 }
 

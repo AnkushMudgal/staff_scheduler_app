@@ -26,6 +26,7 @@ public class SupervisorController {
     @Produces(value = MediaType.APPLICATION_JSON)
     public @ResponseBody
     Map<String, Map> getEmployees(@RequestParam Date startDate, @RequestParam Date endDate) {
+
         return  schedulerService.getEmployees(startDate);
     }
 
