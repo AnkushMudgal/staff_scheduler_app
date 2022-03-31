@@ -42,6 +42,7 @@ maven-build:
       - feature-admin-pipeline
       - feature-frontend
       - feature-backend
+      - dev-hm-ag2ss-code-coverage-test
 
 
 maven-test:
