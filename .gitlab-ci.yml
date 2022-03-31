@@ -6,6 +6,7 @@ stages:
   - deploy
 
 
+
 code_quality:
   stage: code_quality
   variables:
@@ -56,6 +57,19 @@ maven-test:
       - feature-admin-pipeline
       - feature-frontend
       - feature-backend
+      - dev-hm-ag2ss-code-coverage-test
+
+run tests:
+  stage: test
+  image: python:3
+  script:
+    - pip install pytest pytest-cov
+    - coverage run -m pytest
+    - coverage report
+    - coverage xml
+  artifacts:
+    reports:
+      cobertura: coverage.xml
 
 deploy-prod:
   stage: deploy
@@ -91,4 +105,5 @@ deploy-test:
     - dpl --provider=heroku --app=app-staff-scheduler-test --api-key=$HEROKU_API_KEY
   only:
     refs:
+      - dev-hm-ag2ss-code-coverage-test
       - test-app
