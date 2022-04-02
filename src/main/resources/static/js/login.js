@@ -59,17 +59,22 @@ $(document).ready(function(){
                 url: '/login/request',
                 passwordType: true,
                 success: function(data, response){
-                    console.log(response)
+                    if(response == "success") {
+                        sessionStorage.setItem('userId', loginId);
+                        sessionStorage.setItem('departmentId', data.departmentId);
+                    }
 
+                    // Get userId from session storage which will be used in request body of APIs
+                    let userId = sessionStorage.getItem('userId');
                     if (data.userType === "ADMIN" && data.status === 'SUCCESS') {
                         $(location).attr('href',"/views/admin.html");
                     } else if (data.userType === "SUPERVISOR" && data.status === 'SUCCESS') {
-                        $(location).attr('href',"/views/supervisor.html");
+                        $(location).attr('href',"/views/supervisorHome.html");
                     } else if (data.userType === 'STAFF' && data.status === 'SUCCESS'){
-                        $(location).attr('href',"/views/staff.html");
+                        $(location).attr('href',"/views/staffHome.html");
                     } else if (data.status === 'INCORRECT_PASSWORD'){
                         //Respond with Error
-                        alert("Incorrect Password for ID: " + loginId);
+                        $("#informFailure").modal('show');
                     } else {
                         $("#invalid").modal('show');
                     }

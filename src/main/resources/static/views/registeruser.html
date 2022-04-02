@@ -34,6 +34,22 @@
                 </div>
             </div>
         </nav>
+        <script>
+            //Script to Make sure that while a new user is being registered, the data of joining falls after the Registration date.
+            $( document ).ready(function() {
+                var today = new Date().toISOString().split('T')[0];
+                //Setting Min to Today
+                document.getElementsByName("dateOfJoining")[0].setAttribute('min', today);
+                console.log( "Min : " + today );
+                var date = new Date();
+                //Logic to Set Max - Disabled because max date of joining can be anything after the registration is done.
+                var max = date.setDate(date.getDate() + 7 );
+                max = new Date(max).toISOString().split('T')[0]
+                //document.getElementsByName("dateOfJoining")[0].setAttribute('max', max);
+                console.log( "Max : " + max );
+                console.log( "document loaded" );
+            });
+        </script>
 
         <div class = "container">
             <div class="col-md-6" style="margin: inherit"> <h1 >Register A New Employee</h1> </div>
@@ -42,12 +58,12 @@
                 <div class="col-md-5">
                     <form id="register" action="/" method="post">
                         <div >
-                            <label class="col-form-label mt-4" for="employeeNumber"> <b>Enter their Employee Number:</b></label>
+                            <label class="col-form-label mt-4" for="employeeNumber"> <b>Enter the Employee Number:</b></label>
                             <input type="text" class="form-control" placeholder="Starts with EMP" id="employeeNumber" name='employeeNumber' spellcheck="false" data-ms-editor="true">
                             <div id="error" class="invalid-feedback"> <b>Employee Number is Mandatory Field.</b><br></div>
                         </div>
                         <div >
-                            <label class="col-form-label mt-4" for="emailId"> <b>Enter their Employee Email:</b></label>
+                            <label class="col-form-label mt-4" for="emailId"> <b>Enter the Employee Email:</b></label>
                             <input type="text" class="form-control" placeholder="Starts with EMP" id="emailId" name='emailId' spellcheck="false" data-ms-editor="true">
                         </div>
                         <div >
@@ -68,6 +84,10 @@
                         </div>
                         <div>
                             <br><h6> <b>What's their Role?</b></h6>
+                            <div class="form-check disabled">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="roleId" id="roleIdIntern" value="3"> Intern </label>
+                            </div>
                              <div class="form-check">
                                 <label class="form-check-label">
                                 <input type="radio" class="form-check-input" name="roleId" id="roleIdSupervisor" value="1" checked=""> Supervisor </label>
@@ -82,7 +102,7 @@
                             </div>
                         </div>
                         <div >
-                            <label class="col-form-label mt-4" for="maxAvailabilityHours"> <b>Maximum Availability Hours:</b></label>
+                            <label class="col-form-label mt-4" for="maxAvailabilityHours"> <b>Maximum Availability Hours per day:</b></label>
                             <input type="number" min= 1 max= 9 class="form-control" placeholder="How many hours they can work per day?" id="maxAvailabilityHours" name='maxAvailabilityHours' spellcheck="false" data-ms-editor="true">
                         </div>
                         <div>
