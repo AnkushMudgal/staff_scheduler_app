@@ -1,8 +1,6 @@
 package com.scheduler.app.supervisor.controller;
 
-import com.scheduler.app.supervisor.model.entity.DailyShiftPOJO;
 import com.scheduler.app.supervisor.model.request.ShiftDetailsRequest;
-import com.scheduler.app.admin.model.response.AdminInfoResponse;
 import com.scheduler.app.supervisor.model.response.ShiftDetailsResponse;
 import com.scheduler.app.supervisor.model.response.SupervisorInfoResponse;
 import com.scheduler.app.supervisor.service.SchedulerService;
@@ -16,11 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.sql.Date;
-import java.util.List;
 
 
 /**
@@ -71,9 +67,18 @@ public class SupervisorController {
      * Algorithm trigger - Triggers to Generate Schedule Algorithm.
      * Had no Input Params or output as the algorithm uses data from the DB & writes the output to the DB as well.
      */
+    @Operation(summary = "Generate the schedule for the next week for the department of the current supervisor.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Success",
+                    content = @Content),
+            @ApiResponse(responseCode = "400", description = "Invalid",
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "not found",
+                    content = @Content)})
+    @Produces(value = MediaType.APPLICATION_JSON)
     @GetMapping("/generate/schedule")
     @ResponseStatus(value = HttpStatus.OK)
-    public void algorithmTrigger(){
+    public void algorithmTrigger() {
         schedulerService.algoImplementation();
     }
 
@@ -89,7 +94,7 @@ public class SupervisorController {
             @ApiResponse(responseCode = "200", description = "Information like employee count, upcoming holidays etc are " +
                     "successfully retrieved from DB",
                     content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = AdminInfoResponse.class))}),
+                            schema = @Schema(implementation = SupervisorInfoResponse.class))}),
             @ApiResponse(responseCode = "400", description = "Invalid",
                     content = @Content),
             @ApiResponse(responseCode = "404", description = "not found",
@@ -97,7 +102,7 @@ public class SupervisorController {
     @GetMapping("/fetch/info")
     @Produces(value = MediaType.APPLICATION_JSON)
     public @ResponseBody
-    SupervisorInfoResponse getStatistic(@RequestParam Boolean onload, @RequestParam String department){
+    SupervisorInfoResponse getStatistic(@RequestParam Boolean onload, @RequestParam String department) {
 
         return utilityService.getSupervisorStats(onload, department);
     }
