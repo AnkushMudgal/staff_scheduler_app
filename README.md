@@ -37,3 +37,15 @@ swagger api-docs - https://app-staff-scheduler.herokuapp.com/api-docs/
 spring.profiles.active=develop  
 spring.profiles.active=test  
 spring.profiles.active=prod  
+
+## Contributors
+
+Ankush Mudgal
+
+Bhavesh Lalwani
+
+Hrishita Samir Mavani
+
+Gandhi Rajan Mahendran
+
+Meghna Kumar
